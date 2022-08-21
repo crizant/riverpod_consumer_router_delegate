@@ -5,7 +5,8 @@ class ColorRouteInformationParser
     extends RouteInformationParser<ColorRouteConfig> {
   @override
   Future<ColorRouteConfig> parseRouteInformation(
-      RouteInformation routeInformation) async {
+    RouteInformation routeInformation,
+  ) async {
     final uri = Uri.parse(routeInformation.location!);
     // Handle '/'
     if (uri.pathSegments.isEmpty) {
@@ -16,7 +17,7 @@ class ColorRouteInformationParser
     if (uri.pathSegments.length == 2) {
       if (uri.pathSegments[0] == 'color') {
         final String remaining = uri.pathSegments[1];
-        int? value = int.tryParse(remaining, radix: 16);
+        final int? value = int.tryParse(remaining, radix: 16);
         if (value != null) {
           return ColorRouteConfig.detail(
             Color(value),

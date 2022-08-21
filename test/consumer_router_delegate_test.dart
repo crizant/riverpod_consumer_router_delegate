@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:riverpod_consumer_router_delegate/consumer_router_delegate.dart';
+import 'package:riverpod_consumer_router_delegate/src/router_delegate_ref.dart';
 import 'utils.dart';
 
 void main() {
@@ -47,13 +47,19 @@ void main() {
     final stateProvider = StateProvider((ref) => 0, name: 'state');
     final notifier0 = TestNotifier();
     final notifier1 = TestNotifier(42);
-    final provider0 = StateNotifierProvider<TestNotifier, int>((_) {
-      return notifier0;
-    }, name: '0');
-    final provider1 = StateNotifierProvider<TestNotifier, int>((_) {
-      return notifier1;
-    }, name: '1');
-    var buildCount = 0;
+    final provider0 = StateNotifierProvider<TestNotifier, int>(
+      (_) {
+        return notifier0;
+      },
+      name: '0',
+    );
+    final provider1 = StateNotifierProvider<TestNotifier, int>(
+      (_) {
+        return notifier1;
+      },
+      name: '1',
+    );
+    int buildCount = 0;
     final RouterDelegateRef ref = RouterDelegateRef(
       providerContainer: container,
       onDependenciesUpdate: () {
@@ -128,19 +134,25 @@ void main() {
   });
 
   testWidgets(
-      'Consumer removing one of multiple listeners on a provider still listen to the provider',
-      (tester) async {
+      'Consumer removing one of multiple listeners on a provider still listen'
+      ' to the provider', (tester) async {
     final changeNotifier = ChangeNotifier();
     final stateProvider = StateProvider((ref) => 0, name: 'state');
     final notifier0 = TestNotifier();
     final notifier1 = TestNotifier(42);
-    final provider0 = StateNotifierProvider<TestNotifier, int>((_) {
-      return notifier0;
-    }, name: '0');
-    final provider1 = StateNotifierProvider<TestNotifier, int>((_) {
-      return notifier1;
-    }, name: '1');
-    var buildCount = 0;
+    final provider0 = StateNotifierProvider<TestNotifier, int>(
+      (_) {
+        return notifier0;
+      },
+      name: '0',
+    );
+    final provider1 = StateNotifierProvider<TestNotifier, int>(
+      (_) {
+        return notifier1;
+      },
+      name: '1',
+    );
+    int buildCount = 0;
     final RouterDelegateRef ref = RouterDelegateRef(
       providerContainer: container,
       onDependenciesUpdate: () {

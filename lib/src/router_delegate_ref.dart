@@ -1,33 +1,5 @@
-library riverpod_consumer_router_delegate;
-
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-abstract class ConsumerRouterDelegate<T> extends RouterDelegate<T> {
-  late final RouterDelegateRef _ref;
-  ConsumerRouterDelegate(Ref ref) {
-    _ref = RouterDelegateRef(
-      providerContainer: ref.container,
-      onDependenciesUpdate: onDependenciesUpdate,
-    );
-    ref.onDispose(_ref.dispose);
-  }
-
-  WidgetRef get ref => _ref;
-
-  void onDependenciesUpdate();
-
-  /// Override this method instead of original `build` method
-  Widget builder(BuildContext context);
-
-  /// DO NOT override this method!!!
-  @override
-  @nonVirtual
-  Widget build(BuildContext context) {
-    return _ref.build(() => builder(context));
-  }
-}
 
 class RouterDelegateRef implements WidgetRef {
   final ProviderContainer _container;
@@ -66,7 +38,8 @@ class RouterDelegateRef implements WidgetRef {
   }) {
     assert(
       debugDoingBuild,
-      '`ref.listen` can only be used within the `builder` method of a ConsumerRouterDelegate',
+      '`ref.listen` can only be used within the `builder` method of '
+      'a ConsumerRouterDelegate',
     );
     final sub = _container.listen<T>(provider, listener, onError: onError);
     _listeners.add(sub);
@@ -93,10 +66,12 @@ class RouterDelegateRef implements WidgetRef {
 
   Widget build(Widget Function() builder) {
     try {
-      assert(() {
-        _debugDoingBuild = true;
-        return true;
-      }());
+      assert(
+        () {
+          _debugDoingBuild = true;
+          return true;
+        }(),
+      );
       _oldDependencies = _dependencies;
       for (var i = 0; i < _listeners.length; i++) {
         _listeners[i].close();
@@ -109,10 +84,12 @@ class RouterDelegateRef implements WidgetRef {
         dep.close();
       }
       _oldDependencies = null;
-      assert(() {
-        _debugDoingBuild = false;
-        return true;
-      }());
+      assert(
+        () {
+          _debugDoingBuild = false;
+          return true;
+        }(),
+      );
     }
   }
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:riverpod_consumer_router_delegate/consumer_router_delegate.dart';
+import 'package:riverpod_consumer_router_delegate/riverpod_consumer_router_delegate.dart';
 import '../screens/color_detail.dart';
 import '../screens/color_list.dart';
 import '../service_locator.dart';

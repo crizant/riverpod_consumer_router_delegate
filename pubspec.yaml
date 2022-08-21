@@ -1,7 +1,5 @@
 name: riverpod_consumer_router_delegate
-description: |
-  This package enables you to use the [flutter_riverpod](https://pub.dev/packages/flutter_riverpod) package with the [flutter navigator 2.0 API](https://medium.com/flutter/learning-flutters-new-navigation-and-routing-system-7c9068155ade).
-  Inside your custom router delegate class, you may use `ref.watch()`, `ref.read()`, `ref.listen()` and `ref.refresh()` methods just like in `ConsumerStatefulWidget`s.
+description: Use `flutter_riverpod` `ref.*` methods inside a navigator 2.0 router delegate.
 version: 0.9.0
 homepage: https://github.com/crizant/riverpod_consumer_router_delegate
 
@@ -15,9 +13,9 @@ dependencies:
   flutter_riverpod: ^1.0.0
 
 dev_dependencies:
+  flutter_lints: ^2.0.0
   flutter_test:
     sdk: flutter
-  flutter_lints: ^2.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
